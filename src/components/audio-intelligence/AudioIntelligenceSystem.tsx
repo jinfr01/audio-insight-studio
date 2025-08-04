@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Separator } from '@/components/ui/separator';
+import { useTheme } from 'next-themes';
 import { 
   Upload, 
   Play, 
@@ -18,7 +19,9 @@ import {
   CheckCircle,
   Loader2,
   FileAudio,
-  MoreVertical
+  MoreVertical,
+  Moon,
+  Sun
 } from 'lucide-react';
 import { UploadPanel } from './UploadPanel';
 import { SettingsSidebar } from './SettingsSidebar';
@@ -37,6 +40,7 @@ interface ProcessingStage {
 }
 
 export default function AudioIntelligenceSystem() {
+  const { theme, setTheme } = useTheme();
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [currentStage, setCurrentStage] = useState<string>('upload');
@@ -118,6 +122,14 @@ export default function AudioIntelligenceSystem() {
           </div>
           
           <div className="flex items-center gap-3">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className="gap-2"
+            >
+              {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </Button>
             <Button
               variant="ghost"
               size="sm"
